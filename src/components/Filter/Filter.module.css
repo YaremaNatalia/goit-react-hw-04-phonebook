@@ -1,0 +1,17 @@
+.formGroup {
+  padding-top: 10px;
+  margin-bottom: 20px;
+}
+
+.formLabel {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.formInput {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}

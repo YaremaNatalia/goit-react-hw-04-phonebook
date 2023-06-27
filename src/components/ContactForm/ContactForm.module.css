@@ -1,0 +1,37 @@
+.form {
+  padding-top: 15px;
+  width: 300px;
+  margin: 0 auto;
+}
+
+.formGroup {
+  margin-bottom: 20px;
+}
+
+.formLabel {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.formInput {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.formBtn {
+  padding: 10px 20px;
+  background-color: #4451da;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.formBtn:hover, .formBtn:focus {
+  background-color: #2db152;
+}
