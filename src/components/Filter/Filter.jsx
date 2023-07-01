@@ -14,7 +14,6 @@ export const Filter = ({ filter, onFilterChange }) => {
         title="Filter using letters, digits, apostrophe, dash and spaces, and can start with +."
         required
         value={filter}
-        //! передаємо посилання на метод onFilterChange, який буде викликатися при зміні інпуту, а не при рендерингу
         onChange={onFilterChange}
       />
     </div>

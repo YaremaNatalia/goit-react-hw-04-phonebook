@@ -4,7 +4,6 @@ import css from './ContactForm.module.css';
 import PropTypes from 'prop-types';
 
 export class ContactForm extends React.Component {
-  //використовується для збереження даних що змінюються, є тільки в класі. При зміні state відбувається перерендеринг (а також при зміні пропсів)
   state = {
     name: '',
     number: '',
@@ -12,23 +11,22 @@ export class ContactForm extends React.Component {
 
   onChangeInput = event => {
     this.setState({ [event.target.name]: event.target.value });
-  }; //передача в значення інпуту в у відповідне поле name бо number  за рахунок динамічного ключа для будь-якого інпута [event.target.name]
+  };
 
   onSubmit = event => {
     event.preventDefault();
     const contactData = {
       name: this.state.name,
-      number: this.state.number.replace(/[\s()-]+/g, ''), // вилучення пробілів, тире, дужок і + для запису лише цифр
-      id: nanoid(), //додавання id за допомогою плагіну nanoid
+      number: this.state.number.replace(/[\s()-]+/g, ''),
+      id: nanoid(),
     };
-    // отримання функції через пропс і передача в неї данних
+
     this.props.onAddContact(contactData);
-    this.setState({ name: '', number: '' }); //повернення полів в початковий стан
+    this.setState({ name: '', number: '' });
   };
 
   render() {
     return (
-      //onSubmit вішаємо на форму а не на кнопку
       <form className={css.form} onSubmit={this.onSubmit}>
         <div className={css.formGroup}>
           <label className={css.formLabel}>

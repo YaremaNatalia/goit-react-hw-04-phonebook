@@ -10,40 +10,54 @@ export class App extends React.Component {
     filter: '',
   };
 
+  componentDidMount() {
+    const stringifContacts = localStorage.getItem('contacts');
+    const contacts = JSON.parse(stringifContacts) ?? [];
+
+    this.setState({ contacts });
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.contacts !== this.state.contacts) {
+      const stringifContacts = JSON.stringify(this.state.contacts);
+      localStorage.setItem('contacts', stringifContacts);
+    }
+  }
+
   onAddContact = contactData => {
     const { name, number } = contactData;
     const { contacts } = this.state;
-    // перевірка наявності імені і номеру телефону в контактах,з приведенням в нижній регістр(незалежно від того велика чи мала літера буде працювати)
+
     const isDuplicateName = contacts.some(
       contact =>
         contact.name.toLowerCase() === name.toLowerCase() ||
         contact.number === number
     );
-    // якщо є дублікат видаємо повідомлення і виходимо з функції
+
     if (isDuplicateName) {
       return Notiflix.Notify.failure(
         `${name} or ${number} is already in contacts!`
       );
     }
-    // в іншому випадку розпилюємо попередні контакти і дописуємо новий контакт в кінець масиву
+
     this.setState(prevState => ({
       contacts: [...prevState.contacts, contactData],
     }));
   };
-  // переписуємо масив контактів фільтруючи всі контакти id яких не дорівнює обраному id, що передається у функцію з компоненту ContactList
+
   onRemoveContact = contactId => {
     this.setState({
       contacts: this.state.contacts.filter(contact => contact.id !== contactId),
       filter: '',
     });
   };
-  //  запис в state.filter значення інпуту filter
+
   onFilterChange = event => {
     this.setState({
       filter: event.target.value,
     });
   };
-  //  если filter пустое, то условие фильтрации не выполняется, и метод filter просто возвращает исходный массив contacts без  изменений.
+
   filteredContacts = () => {
     const { filter, contacts } = this.state;
 
@@ -74,9 +88,7 @@ export class App extends React.Component {
             onFilterChange={this.onFilterChange}
           />
           <ContactList
-            // передача результату функції filteredContacts
             contacts={this.filteredContacts()}
-            // передача посилання на функцію onRemoveContact для отримання id
             onRemoveContact={this.onRemoveContact}
           />
         </div>
