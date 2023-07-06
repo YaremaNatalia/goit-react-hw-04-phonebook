@@ -12,15 +12,15 @@ export class App extends React.Component {
 
   componentDidMount() {
     const stringifContacts = localStorage.getItem('contacts');
-    const contacts = JSON.parse(stringifContacts) ?? [];
-
-    this.setState({ contacts });
+    const contacts = JSON.parse(stringifContacts);
+    if (contacts) {
+      this.setState({ contacts });
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.contacts !== this.state.contacts) {
-      const stringifContacts = JSON.stringify(this.state.contacts);
-      localStorage.setItem('contacts', stringifContacts);
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
     }
   }
 
